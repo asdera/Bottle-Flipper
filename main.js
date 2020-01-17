@@ -12,9 +12,12 @@ var bottle;
 var boxes;
 var grounds;
 var bounds;
+var win;
 var canvaswidth = 1800;
 var canvasheight = 900;
 var game = {};
+var reset = 0;
+var mouse
 
 function setup() {
 	game.startingPoint = {
@@ -28,6 +31,7 @@ function setup() {
 	bottles = []
 	boxes = [];
 	grounds = [];
+	win = reset == 1 ? "Drag the Bottle to start" : "";
 	Body.create();
 	createCanvas(canvaswidth, canvasheight);
 	engine = Engine.create();
@@ -42,10 +46,10 @@ function setup() {
 function draw() {
 	background(51);
 	if (bottle.destroy) {
-			clearWorld();
-		} else {
-			bottle.show();
-		}
+		clearWorld();
+	} else {
+		bottle.show();
+	}
 	finish.show();
 	for (var i = boxes.length - 1; i >= 0; i--) {
 		boxi = boxes[i];
@@ -63,6 +67,18 @@ function draw() {
 			groundi.show();
 		}
 	}
+	push();
+	fill("red");
+	stroke(255);
+	strokeWeight(4);
+	textAlign(CENTER);
+	textSize(144);
+	text(win, width/2, height/6);
+	fill("blue");
+	textSize(64);
+	text(win != "" ? "Press R to start another game" : "", width/2, height/3);
+	// ellipse(width/2, height/8, 20);
+	pop();
 }
 
 function clearWorld() {
