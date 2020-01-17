@@ -9,9 +9,13 @@ function mousePressed() {
 	// boxes.push(new Box(Bodies.circle(mouseX, mouseY, 20, { restitution: 0.4 })));
 	mouse.x = mouseX;
 	mouse.y = mouseY;
+	mouse.selected = true;
+	win = "";
+	reset++;
 }
 
 function mouseReleased() {
+	mouse.selected = false;
 	if (mouseButton == LEFT) {
 		if (Vertices.contains(bottle.body.vertices, {x: mouse.x, y: mouse.y})) {
 			if (bottle.grounded > 5) { 

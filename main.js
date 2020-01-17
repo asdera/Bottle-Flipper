@@ -17,7 +17,6 @@ var canvaswidth = 1800;
 var canvasheight = 900;
 var game = {};
 var reset = 0;
-var mouse
 
 function setup() {
 	game.startingPoint = {
@@ -41,6 +40,7 @@ function setup() {
 	finish = new Box(Bodies.rectangle(game.finishingPoint.x, game.finishingPoint.y, 200, 20, { isStatic: true }), "red");
 	setBottle();
 	setBoundaries();
+	win = reset == 1 ? "Drag the Bottle to start" : "";
 }
 
 function draw() {
@@ -76,8 +76,13 @@ function draw() {
 	text(win, width/2, height/6);
 	fill("blue");
 	textSize(64);
-	text(win != "" ? "Press R to start another game" : "", width/2, height/3);
+	text((win != "" && reset != 1) ? "Press R to start another game" : "", width/2, height/3);
 	// ellipse(width/2, height/8, 20);
+
+	if (mouse.selected) {
+		line(mouse.x, mouse.y, mouseX, mouseY);
+	}
+
 	pop();
 }
 
